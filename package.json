@@ -1,0 +1,26 @@
+{
+  "name": "onlineshop",
+  "version": "1.0.0",
+  "description": "Proiect Nodejs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "gulp": "gulp"
+  },
+  "author": "Mihnea Gherghel+Fanica Narcis+Gheorghe Liviu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "graphql": "^16.8.1",
+    "graphql-http": "^1.22.0",
+    "graphql-playground-middleware-express": "^1.7.23",
+    "gulp": "^4.0.2",
+    "mysql2": "^3.6.5",
+    "nodemon": "^3.0.2",
+    "pg": "^8.11.3",
+    "process": "^0.11.10",
+    "sequelize": "^6.35.1"
+  }
+}
