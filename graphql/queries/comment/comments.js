@@ -12,7 +12,7 @@ const queryComments={
     type: new GraphQLList(CommentType),
     description:'List of all comments',
     resolve: async () => {
-        return await db.Comments.findAll()
+        return await db.Comment.findAll()
     }
 }
 

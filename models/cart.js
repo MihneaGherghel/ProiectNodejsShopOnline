@@ -10,11 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      //Cart.belongsTo(models.User, { as: 'user' })
-      //Cart.belongsToMany(models.Product, {
-       // through: 'CartProducts',
-      //  as: 'product'
-     // });
+      Cart.belongsTo(models.User, { as: 'user' })
+      Cart.belongsToMany(models.Product, {
+        through: 'CartProducts',
+        as: 'product',
+        foreignKey:'CartId',
+        timestamps:false
+      });
     }
   }
   Cart.init({
@@ -24,8 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull:true
     },
-    UserId: {
-      type: DataTypes.INTEGER,
+    UserId:{
+      type:DataTypes.INTEGER,
       allowNull:true
     },
     status: {

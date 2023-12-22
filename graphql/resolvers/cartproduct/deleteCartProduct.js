@@ -1,9 +1,13 @@
 const db=require('../../../models/index')
 
 const deleteCartProductResolver = async (_, args) => {
-    const { id } = args;
-
-    const targetCartProduct = await db.CartProduct.findByPk(id);
+    const { CartId,ProductId } = args;
+    const targetCartProduct = await db.CartProduct.findOne({
+      where:{
+        CartId:CartId,
+        ProductId:ProductId
+      }
+    });
 
     if(!targetCartProduct) {
       return null;

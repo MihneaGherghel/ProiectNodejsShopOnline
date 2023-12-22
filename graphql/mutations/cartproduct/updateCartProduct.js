@@ -10,7 +10,6 @@ const updateCartProduct={
     type: CartProductType,
     description:'Update a cart-product',
     args:{
-        id:{ type: new GraphQLNonNull(GraphQLID)},
         CartId:{ type: new GraphQLNonNull(GraphQLID)},
         ProductId:{ type: new GraphQLNonNull(GraphQLID)},
         cantity:{ type: new GraphQLNonNull(GraphQLInt)}

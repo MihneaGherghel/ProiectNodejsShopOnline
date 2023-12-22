@@ -11,7 +11,7 @@ const productQuery={
     type: ProductType,
     description:'A single product',
     args:{
-            id:{type:new GraphQLNonNull(GraphQLID)}
+            id:{type:GraphQLID}
     },
     resolve: async (parent,args)=>{
         const {id}=args
