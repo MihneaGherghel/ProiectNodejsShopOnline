@@ -1,21 +1,27 @@
-const db=require('../../../models/index')
+const db = require("../../../models/index");
+const checkUser = require("../../../utils/checkUser");
+
 const updateCommentResolver = async (_, args) => {
-    const { id,ProductId,UserId,comment,stars } = args;
+  const { id, ProductId, UserId, comment, stars } = args;
 
-    const targetComment = await db.Comment.findByPk(id);
+  const { user } = context.user;
 
-    if(!targetComment) {
-      return null;
-    }
+  checkUser(user);
 
-    const updatedComment = await targetComment.update({
-      ProductId,
-      UserId,
-      comment,
-      stars
-    });
+  const targetComment = await db.Comment.findByPk(id);
 
-    return updatedComment;
-}
+  if (!targetComment) {
+    return null;
+  }
+
+  const updatedComment = await targetComment.update({
+    ProductId,
+    UserId,
+    comment,
+    stars,
+  });
+
+  return updatedComment;
+};
 
 module.exports = updateCommentResolver;

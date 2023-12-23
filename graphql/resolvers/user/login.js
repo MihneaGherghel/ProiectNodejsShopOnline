@@ -8,7 +8,7 @@ const loginResolver = async (_, args) => {
   const user = await db.User.findOne({
     where: {
       email,
-      password,
+      password, //TODO replace with checking password hash
     },
   });
 

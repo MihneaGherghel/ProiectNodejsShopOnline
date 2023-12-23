@@ -1,23 +1,28 @@
-const db=require('../../../models/index')
+const db = require("../../../models/index");
+const checkUser = require("../../../utils/checkUser");
 
 const updateProductResolver = async (_, args) => {
-    const { id,name,photo_path,description,price } = args;
+  const { id, name, photo_path, description, price } = args;
 
-    const targetProduct = await db.Product.findByPk(id);
+  const { user } = context.user;
 
-    if(!targetProduct) {
-      return null;
-    }
+  checkUser(user);
 
-    const updatedProduct = await targetProduct.update({
-      id,
-      name,
-      photo_path,
-      description,
-      price
-    });
+  const targetProduct = await db.Product.findByPk(id);
 
-    return updatedProduct;
-}
+  if (!targetProduct) {
+    return null;
+  }
+
+  const updatedProduct = await targetProduct.update({
+    id,
+    name,
+    photo_path,
+    description,
+    price,
+  });
+
+  return updatedProduct;
+};
 
 module.exports = updateProductResolver;

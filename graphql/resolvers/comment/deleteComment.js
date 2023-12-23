@@ -1,21 +1,26 @@
-const db=require('../../../models/index')
+const db = require("../../../models/index");
+const checkUser = require("../../../utils/checkUser");
 
 const deleteCommentResolver = async (_, args) => {
-    const { id } = args;
+  const { id } = args;
 
-    const targetComment = await db.Comment.findByPk(id);
+  const { user } = context.user;
 
-    if(!targetComment) {
-      return null;
-    }
+  checkUser(user);
 
-    try {
-      await targetComment.destroy();
+  const targetComment = await db.Comment.findByPk(id);
 
-      return true;
-    } catch (e) {
-      throw new Error(e);
-    }
+  if (!targetComment) {
+    return null;
   }
+
+  try {
+    await targetComment.destroy();
+
+    return true;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
 
 module.exports = deleteCommentResolver;

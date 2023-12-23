@@ -6,7 +6,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     const data = new Array(10).fill().map(() => ({
       email: randEmail(),
-      password: randPassword(),
+      password: randPassword(), //TODO replace with password hash
       address:randAddress().street,
       age:randNumber({ min: 10, max: 50 }),
       username:randUserName(),

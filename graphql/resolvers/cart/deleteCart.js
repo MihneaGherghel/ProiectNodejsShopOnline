@@ -1,21 +1,26 @@
-const db=require('../../../models/index')
+const db = require("../../../models/index");
+const checkUser = require("../../../utils/checkUser");
 
 const deleteCartResolver = async (_, args) => {
-    const { id } = args;
+  const { id } = args;
 
-    const targetCart = await db.Cart.findByPk(id);
+  const { user } = context.user;
 
-    if(!targetCart) {
-      return null;
-    }
+  checkUser(user);
 
-    try {
-      await targetCart.destroy();
+  const targetCart = await db.Cart.findByPk(id);
 
-      return true;
-    } catch (e) {
-      throw new Error(e);
-    }
+  if (!targetCart) {
+    return null;
   }
+
+  try {
+    await targetCart.destroy();
+
+    return true;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
 
 module.exports = deleteCartResolver;

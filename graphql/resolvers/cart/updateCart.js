@@ -1,21 +1,26 @@
-const db=require('../../../models/index')
+const db = require("../../../models/index");
+const checkUser = require("../../../utils/checkUser");
 
 const updateCartResolver = async (_, args) => {
-    const { id,UserId,status,total_price } = args;
+  const { id, UserId, status, total_price } = args;
 
-    const targetCart = await db.Cart.findByPk(id);
+  const { user } = context.user;
 
-    if(!targetCart) {
-      return null;
-    }
+  checkUser(user);
 
-    const updatedCart = await targetCart.update({
-      UserId,
-      status,
-      total_price
-    });
+  const targetCart = await db.Cart.findByPk(id);
 
-    return updatedCart;
-}
+  if (!targetCart) {
+    return null;
+  }
+
+  const updatedCart = await targetCart.update({
+    UserId,
+    status,
+    total_price,
+  });
+
+  return updatedCart;
+};
 
 module.exports = updateCartResolver;
