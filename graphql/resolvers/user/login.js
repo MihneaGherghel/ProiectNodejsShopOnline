@@ -1,5 +1,5 @@
-const { JWT_SECRET } = require("../../config/constants");
-const db = require("../../models");
+const { JWT_SECRET } = require("../../../config/config.json");
+const db = require("../../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -8,12 +8,13 @@ const loginResolver = async (_, args) => {
   const user = await db.User.findOne({
     where: {
       email,
+      password,
     },
   });
 
-  const passwordIsValid = bcrypt.compareSync(password, user.password);
+  //const passwordIsValid = bcrypt.compareSync(password, user.password);
 
-  if (passwordIsValid) {
+  if (user) {
     return {
       token: jwt.sign({ userId: user.id }, JWT_SECRET),
     };

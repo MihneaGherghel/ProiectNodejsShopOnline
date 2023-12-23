@@ -1,5 +1,5 @@
 const { GraphQLObjectType, GraphQLString, GraphQLNonNull } = require("graphql");
-const loginResolver = require("../resolvers/loginResolver");
+const loginResolver = require("../../resolvers/user/login");
 const LoginResultType = new GraphQLObjectType({
   name: "LoginResult",
   fields: {
