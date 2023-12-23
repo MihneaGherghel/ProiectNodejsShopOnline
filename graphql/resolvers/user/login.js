@@ -3,7 +3,7 @@ const db = require("../../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const loginResolver = async (_, args) => {
+const loginResolver = async (_, args, context) => {
   const { email, password } = args;
   const user = await db.User.findOne({
     where: {

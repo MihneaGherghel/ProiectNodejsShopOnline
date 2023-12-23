@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const updateCommentResolver = async (_, args) => {
+const updateCommentResolver = async (_, args, context) => {
   const { id, ProductId, UserId, comment, stars } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const targetComment = await db.Comment.findByPk(id);
 

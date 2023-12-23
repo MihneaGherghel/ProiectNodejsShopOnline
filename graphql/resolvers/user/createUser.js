@@ -5,8 +5,8 @@ const checkUser = require("../../../utils/checkUser");
 const createUserResolver = async (_, args, context) => {
   const { username, email, password, age, city, address, postal_code } = args;
 
-  const { user } = context.user;
-  checkUser(user);
+  const req = context.req;
+  checkUser(req);
 
   //const hash = await bcrypt.hash(password, 10);
 

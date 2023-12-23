@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const createProductResolver = async (_, args) => {
+const createProductResolver = async (_, args, context) => {
   const { name, photo_path, description, price } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const newProduct = await db.Product.create({
     name,

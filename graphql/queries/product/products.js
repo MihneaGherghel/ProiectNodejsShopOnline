@@ -9,8 +9,8 @@ const queryProducts = {
   type: new GraphQLList(ProductType),
   description: "List of all products",
   resolve: async (_, args, context) => {
-    const { user } = context.user;
-    checkUser(user);
+    const req = context.req;
+    checkUser(req);
 
     return await db.Product.findAll();
   },

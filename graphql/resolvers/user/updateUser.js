@@ -1,13 +1,13 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const updateUserResolver = async (_, args) => {
+const updateUserResolver = async (_, args, context) => {
   const { id, username, email, password, age, city, address, postal_code } =
     args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const targetUser = await db.User.findByPk(id);
   if (!targetUser) {

@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const deleteProductResolver = async (_, args) => {
+const deleteProductResolver = async (_, args, context) => {
   const { id } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const targetProduct = await db.Product.findByPk(id);
 

@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const deleteCartProductResolver = async (_, args) => {
+const deleteCartProductResolver = async (_, args, context) => {
   const { CartId, ProductId } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const targetCartProduct = await db.CartProduct.findOne({
     where: {

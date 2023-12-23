@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const createCommentResolver = async (_, args) => {
+const createCommentResolver = async (_, args, context) => {
   const { ProductId, UserId, comment, stars } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const newComment = await db.Comment.create({
     ProductId,

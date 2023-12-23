@@ -14,8 +14,8 @@ const cartQuery = {
   resolve: async (_, args, context) => {
     const { id } = args;
 
-    const { user } = context.user;
-    checkUser(user);
+    const req = context.req;
+    checkUser(req);
 
     return await db.Cart.findByPk(id);
   },

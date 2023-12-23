@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const createCartResolver = async (_, args) => {
+const createCartResolver = async (_, args, context) => {
   const { UserId, status, total_price } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const newCart = await db.Cart.create({
     UserId,

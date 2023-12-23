@@ -9,8 +9,8 @@ const queryCarts = {
   type: new GraphQLList(CartType),
   description: "List of all carts",
   resolve: async (_, args, context) => {
-    const { user } = context.user;
-    checkUser(user);
+    const req = context.req;
+    checkUser(req);
 
     return await db.Cart.findAll();
   },

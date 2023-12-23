@@ -12,7 +12,7 @@ app.all(
   createHandler({
     schema,
     context: (req) => {
-      return { user: req.raw.user };
+      return { req };
     },
   })
 );

@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const updateCartResolver = async (_, args) => {
+const updateCartResolver = async (_, args, context) => {
   const { id, UserId, status, total_price } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const targetCart = await db.Cart.findByPk(id);
 

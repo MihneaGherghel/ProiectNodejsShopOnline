@@ -9,8 +9,9 @@ const queryComments = {
   type: new GraphQLList(CommentType),
   description: "List of all comments",
   resolve: async (_, args, context) => {
-    const { user } = context.user;
-    checkUser(user);
+    const req = context.req;
+    console.log()
+    checkUser(req);
 
     return await db.Comment.findAll();
   },

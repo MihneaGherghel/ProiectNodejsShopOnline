@@ -1,12 +1,12 @@
 const db = require("../../../models/index");
 const checkUser = require("../../../utils/checkUser");
 
-const deleteCommentResolver = async (_, args) => {
+const deleteCommentResolver = async (_, args, context) => {
   const { id } = args;
 
-  const { user } = context.user;
+  const req = context.req;
 
-  checkUser(user);
+  checkUser(req);
 
   const targetComment = await db.Comment.findByPk(id);
 
