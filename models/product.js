@@ -1,9 +1,7 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
- class Product extends Model {
+  class Product extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,41 +9,43 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Product.belongsToMany(models.Cart, {
-          through: 'CartProducts',
-          as: 'cart',
-          foreignKey: 'ProductId',
-          timestamps:false
-
+        through: "CartProducts",
+        as: "cart",
+        foreignKey: "ProductId",
+        timestamps: false,
       });
-      Product.hasMany(models.Comment, {as:'comment'})
+      Product.hasMany(models.Comment, { as: "comments" });
     }
   }
-  Product.init({
-    id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    allowNull:true
+  Product.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      photo_path: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      price: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
     },
-    name: {
-      type:DataTypes.STRING,
-      allowNull:true
-    },
-    photo_path: {
-      type:DataTypes.STRING,
-      allowNull:true
-    },
-    description: {
-      type:DataTypes.STRING,
-      allowNull:true
-    },
-    price: {
-      type:DataTypes.FLOAT,
-      allowNull:true
-    },
-  }, {
-    sequelize,
-    modelName: 'Product',
-    timestamps: false
-  });
+    {
+      sequelize,
+      modelName: "Product",
+      timestamps: false,
+    }
+  );
   return Product;
-}
+};
