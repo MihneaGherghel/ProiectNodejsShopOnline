@@ -10,7 +10,6 @@ const queryComments = {
   description: "List of all comments",
   resolve: async (_, args, context) => {
     const req = context.req;
-    console.log()
     checkUser(req);
 
     return await db.Comment.findAll();

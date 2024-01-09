@@ -16,7 +16,7 @@ const productQuery = {
 
     const req = context.req;
     checkUser(req);
-    
+
     return await db.Product.findByPk(id);
   },
 };
